@@ -74,13 +74,15 @@ label {
 }
 
 input,
-textarea {
+textarea,
+select {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 0.7rem 0.8rem;
   font: inherit;
   color: var(--ink);
+  background: #ffffff;
 }
 
 textarea {
@@ -97,6 +99,11 @@ textarea {
   padding: 0.6rem 0.9rem;
   font-weight: 600;
   cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 .button.primary {

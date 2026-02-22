@@ -1,41 +1,41 @@
 # Roadmap
 
-## Phase 0: Foundation (현재 단계)
-- [x] 프로젝트 목적/범위 정의
-- [x] 기본 워크스페이스 구조 생성
-- [x] 환경 점검 스크립트 추가
-- [x] 기본 앱/패키지 스캐폴딩
-- [ ] 의존성 설치
+## Phase 0: Foundation (Current)
+- [x] Define project scope and goals
+- [x] Create workspace baseline structure
+- [x] Add environment check script
+- [x] Scaffold web app and wallet-core package
+- [x] Install dependencies
 
-완료 기준:
-- `bash scripts/check-env.sh`가 통과한다.
-- `apps/web`와 `packages/wallet-core`가 구현 시작 가능한 상태다.
+Exit criteria:
+- `bash scripts/check-env.sh` passes.
+- `apps/web` and `packages/wallet-core` are ready for implementation.
 
 ## Phase 1: Wallet Basics
-- [ ] 지갑 생성/복구 유틸 구현
-- [ ] 주소/체인 정보 표시
-- [ ] 잔액 조회
+- [x] Implement wallet creation/recovery utilities
+- [x] Display address and network info
+- [x] Add native balance lookup
 
-완료 기준:
-- 테스트 계정 기준으로 주소/잔액이 UI에 정상 표시된다.
+Exit criteria:
+- Address and balance are visible in the web UI for a test wallet.
 
 ## Phase 2: Transaction Flow
-- [ ] 트랜잭션 파라미터 입력 폼
-- [ ] 서명 및 전송
-- [ ] 성공/실패 상태 처리
+- [ ] Transaction parameter form
+- [ ] Sign and send transaction
+- [ ] Success/failure state handling
 
-완료 기준:
-- 테스트넷에서 실제 전송 트랜잭션 1회 이상 성공.
+Exit criteria:
+- At least one successful transfer on testnet.
 
 ## Phase 3: Security + DX
-- [ ] 민감정보 로그/저장 점검
-- [ ] 에러 경계/재시도 UX 보강
-- [ ] 테스트(최소 단위 테스트 + 핵심 플로우 점검)
+- [ ] Sensitive data logging/storage audit
+- [ ] Error boundaries and retry UX hardening
+- [ ] Tests (unit + key user flow checks)
 
-완료 기준:
-- 핵심 플로우 실패 시 사용자 메시지와 복구 동선이 명확하다.
+Exit criteria:
+- Failure states in critical flows are clear and recoverable.
 
-## 이번 주 우선순위
-1. 의존성 설치 + 앱 실행 확인
-2. 지갑 생성/복구 UX 고도화
-3. 잔액 조회(테스트넷) 연결
+## This Week Priorities
+1. Harden wallet recovery validation UX
+2. Add transaction form and preflight checks
+3. Implement first testnet send flow

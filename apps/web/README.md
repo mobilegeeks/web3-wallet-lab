@@ -1,6 +1,6 @@
 # apps/web
 
-React + Vite + TypeScript 기반의 웹 지갑 UI 앱입니다.
+React + Vite + TypeScript web wallet UI app.
 
 ## Local
 ```bash

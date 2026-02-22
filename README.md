@@ -1,34 +1,35 @@
 # web3-wallet-lab
 
-`web3-wallet-lab`은 Web3 지갑의 핵심 흐름을 처음부터 직접 구현해보는 실험/학습용 프로젝트입니다.
+`web3-wallet-lab` is a hands-on lab for building core Web3 wallet flows from scratch.
 
-## 우리가 지금 할 일
-- [x] 프로젝트 기준 문서 작성
-- [x] 초기 디렉터리/스크립트 골격 생성
-- [ ] 개발 환경 설치 및 검증
-- [x] 웹 앱 초기화(스캐폴딩)
-- [x] 지갑 핵심 기능 초안 구현
+## Current Focus
+- [x] Define project baseline docs
+- [x] Create initial repository scaffold
+- [x] Validate local setup script
+- [x] Scaffold web app and wallet-core package
+- [x] Implement wallet creation/recovery basics
+- [x] Add network selection and native balance lookup
 
-## 목표 범위 (MVP)
-- 지갑 생성(새 계정)과 복구(시드/프라이빗 키)
-- 지갑 연결 및 주소/잔액 조회
-- 네트워크 전환(테스트넷 우선)
-- 트랜잭션 서명/전송
-- 기본 보안 원칙 적용(민감정보 노출 방지, 환경변수 관리)
+## MVP Scope
+- Wallet creation and recovery (mnemonic/private key)
+- Address display and native balance lookup
+- Network switching (testnet first)
+- Transaction signing and sending
+- Basic security controls (secrets handling, env hygiene)
 
-## 기본 환경
-- Node.js: 20.x LTS (`.nvmrc` 참고)
+## Environment
+- Node.js: 20.x LTS (see `.nvmrc`)
 - pnpm: 9+
 - Git
 
-## 빠른 시작
+## Quick Start
 ```bash
 bash scripts/check-env.sh
 pnpm install
 pnpm dev
 ```
 
-## 작업 구조
+## Workspace Layout
 ```text
 .
 ├── apps/
@@ -47,16 +48,19 @@ pnpm dev
 └── pnpm-workspace.yaml
 ```
 
-## 실행 명령
-- `bash scripts/check-env.sh`: 필수 도구 설치 여부와 버전 점검
-- `pnpm run check:env`: 위 스크립트를 `pnpm`으로 실행
-- `pnpm run setup`: 초기 셋업 점검(현재는 `check:env` 호출)
-- `pnpm run plan`: 로드맵 안내
+## Commands
+- `bash scripts/check-env.sh`: validate required tools and versions
+- `pnpm run check:env`: run the same check script through `pnpm`
+- `pnpm run setup`: install dependencies and run environment checks
+- `pnpm dev`: run web app dev server (`@web3-wallet-lab/web`)
+- `pnpm build`: build all workspace packages
+- `pnpm typecheck`: type-check all workspace packages
+- `pnpm run plan`: print roadmap location
 
-## 구현 로드맵
-상세 체크리스트는 `docs/roadmap.md`에 정리되어 있습니다.
+## Roadmap
+Detailed implementation checklist: `docs/roadmap.md`
 
-## 진행 원칙
-- 작은 단위로 구현하고 매 단계에서 동작 검증
-- 보안 관련 항목은 기능보다 먼저 점검
-- 문서(README/roadmap)와 실제 코드 상태를 항상 동기화
+## Delivery Principles
+- Ship in small increments and validate every step.
+- Treat wallet/security concerns as first-class requirements.
+- Keep docs (`README` / roadmap) synchronized with code state.

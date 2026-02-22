@@ -1,6 +1,8 @@
-export type { WalletSnapshot } from "./wallet";
+export type { BalanceSnapshot, NetworkInfo, SupportedNetwork, WalletSnapshot } from "./wallet";
 export {
   createWallet,
+  fetchNativeBalance,
+  getSupportedNetworks,
   isValidMnemonic,
   isValidPrivateKey,
   maskAddress,
