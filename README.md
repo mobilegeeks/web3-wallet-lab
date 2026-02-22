@@ -6,8 +6,8 @@
 - [x] 프로젝트 기준 문서 작성
 - [x] 초기 디렉터리/스크립트 골격 생성
 - [ ] 개발 환경 설치 및 검증
-- [ ] 웹 앱 초기화
-- [ ] 지갑 핵심 기능 구현
+- [x] 웹 앱 초기화(스캐폴딩)
+- [x] 지갑 핵심 기능 초안 구현
 
 ## 목표 범위 (MVP)
 - 지갑 생성(새 계정)과 복구(시드/프라이빗 키)
@@ -24,13 +24,8 @@
 ## 빠른 시작
 ```bash
 bash scripts/check-env.sh
-```
-
-환경 점검이 통과하면 다음 단계로 진행합니다.
-
-```bash
-# 이후 앱 스캐폴딩 시 실행 예정
 pnpm install
+pnpm dev
 ```
 
 ## 작업 구조
@@ -48,6 +43,7 @@ pnpm install
 ├── .gitignore
 ├── .nvmrc
 ├── package.json
+├── tsconfig.base.json
 └── pnpm-workspace.yaml
 ```
 

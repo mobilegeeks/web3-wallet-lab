@@ -4,12 +4,12 @@
 # Node
 node_modules
 .pnpm-store
-pnpm-lock.yaml
 
 # Build
 dist
 build
 .next
+*.tsbuildinfo
 
 # Env
 .env

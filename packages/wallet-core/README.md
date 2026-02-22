@@ -1,8 +1,11 @@
 # packages/wallet-core
 
-지갑 핵심 로직(키 관리, 주소 파생, 서명 유틸)을 분리하는 패키지입니다.
+지갑 핵심 로직(생성/복구/검증)을 분리하는 패키지입니다.
 
-초기 구현 예정:
-- 지갑 생성/복구 유틸
-- 주소/체인 포맷 유틸
-- 입력값 검증 유틸
+## Exports
+- `createWallet`
+- `recoverWalletFromPrivateKey`
+- `recoverWalletFromMnemonic`
+- `isValidPrivateKey`
+- `isValidMnemonic`
+- `maskAddress`

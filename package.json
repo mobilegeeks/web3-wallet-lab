@@ -3,9 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "check:env": "bash ./scripts/check-env.sh",
-    "setup": "pnpm run check:env",
+    "setup": "pnpm install && pnpm run check:env",
+    "dev": "pnpm --filter @web3-wallet-lab/web dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
     "plan": "echo 'See docs/roadmap.md'"
   }
 }

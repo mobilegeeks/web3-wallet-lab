@@ -1,8 +1,8 @@
 # apps/web
 
-웹 지갑 UI 앱이 위치할 디렉터리입니다.
+React + Vite + TypeScript 기반의 웹 지갑 UI 앱입니다.
 
-초기 구현 예정:
-- 지갑 생성/복구 화면
-- 주소/잔액 조회 화면
-- 트랜잭션 전송 화면
+## Local
+```bash
+pnpm --filter @web3-wallet-lab/web dev
+```
