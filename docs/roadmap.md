@@ -20,9 +20,9 @@ Exit criteria:
 - Address and balance are visible in the web UI for a test wallet.
 
 ## Phase 2: Transaction Flow
-- [ ] Transaction parameter form
-- [ ] Sign and send transaction
-- [ ] Success/failure state handling
+- [x] Transaction parameter form
+- [x] Sign and send transaction
+- [x] Success/failure state handling
 
 Exit criteria:
 - At least one successful transfer on testnet.

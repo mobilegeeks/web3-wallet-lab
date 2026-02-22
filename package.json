@@ -9,7 +9,9 @@
   "scripts": {
     "check:env": "bash ./scripts/check-env.sh",
     "setup": "pnpm install && pnpm run check:env",
-    "dev": "pnpm --filter @web3-wallet-lab/web dev",
+    "dev": "pnpm run dev:web",
+    "dev:web": "pnpm --filter @web3-wallet-lab/web dev",
+    "dev:local": "pnpm --filter @web3-wallet-lab/web dev --host 127.0.0.1 --port 4173",
     "build": "pnpm -r build",
     "typecheck": "pnpm -r typecheck",
     "plan": "echo 'See docs/roadmap.md'"
