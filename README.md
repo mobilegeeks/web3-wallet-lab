@@ -9,6 +9,7 @@
 - [x] Scaffold web app and wallet-core package
 - [x] Implement wallet creation/recovery basics
 - [x] Add network selection and native balance lookup
+- [x] Implement transaction form and sign/send flow
 
 ## MVP Scope
 - Wallet creation and recovery (mnemonic/private key)
@@ -53,6 +54,7 @@ pnpm dev
 - `pnpm run check:env`: run the same check script through `pnpm`
 - `pnpm run setup`: install dependencies and run environment checks
 - `pnpm dev`: run web app dev server (`@web3-wallet-lab/web`)
+- `pnpm run dev:local`: run web app at `127.0.0.1:4173`
 - `pnpm build`: build all workspace packages
 - `pnpm typecheck`: type-check all workspace packages
 - `pnpm run plan`: print roadmap location

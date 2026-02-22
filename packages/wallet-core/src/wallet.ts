@@ -1,4 +1,4 @@
-import { JsonRpcProvider, Mnemonic, Wallet, formatEther, isAddress } from "ethers";
+import { JsonRpcProvider, Mnemonic, Wallet, formatEther, getAddress, isAddress, parseEther } from "ethers";
 
 export type WalletSnapshot = {
   address: string;
@@ -14,6 +14,7 @@ export type NetworkInfo = {
   chainId: number;
   symbol: "ETH";
   rpcUrl: string;
+  explorerTxBaseUrl: string | null;
 };
 
 export type BalanceSnapshot = {
@@ -23,6 +24,33 @@ export type BalanceSnapshot = {
   formatted: string;
   symbol: "ETH";
   updatedAt: string;
+};
+
+export type NativeTransferRequest = {
+  privateKey: string;
+  to: string;
+  amountEth: string;
+  network: SupportedNetwork;
+};
+
+export type TransferProgressStage = "signing" | "broadcasted" | "confirming";
+
+export type TransferProgress = {
+  stage: TransferProgressStage;
+  hash?: string;
+};
+
+export type NativeTransferResult = {
+  network: SupportedNetwork;
+  chainId: number;
+  hash: string;
+  from: string;
+  to: string;
+  amountEth: string;
+  valueWei: string;
+  blockNumber: number;
+  explorerUrl: string | null;
+  confirmedAt: string;
 };
 
 type WalletLike = {
@@ -39,14 +67,16 @@ const NETWORKS: ReadonlyArray<NetworkInfo> = [
     label: "Sepolia",
     chainId: 11155111,
     symbol: "ETH",
-    rpcUrl: "https://ethereum-sepolia-rpc.publicnode.com"
+    rpcUrl: "https://ethereum-sepolia-rpc.publicnode.com",
+    explorerTxBaseUrl: "https://sepolia.etherscan.io/tx"
   },
   {
     key: "mainnet",
     label: "Ethereum Mainnet",
     chainId: 1,
     symbol: "ETH",
-    rpcUrl: "https://cloudflare-eth.com"
+    rpcUrl: "https://cloudflare-eth.com",
+    explorerTxBaseUrl: "https://etherscan.io/tx"
   }
 ] as const;
 
@@ -58,6 +88,37 @@ function normalizePrivateKey(input: string): string {
     throw new Error("Private key is required.");
   }
   return raw.startsWith("0x") ? raw : `0x${raw}`;
+}
+
+function normalizeRecipientAddress(input: string): string {
+  const raw = input.trim();
+  if (!raw) {
+    throw new Error("Recipient address is required.");
+  }
+  if (!isAddress(raw)) {
+    throw new Error("Invalid recipient address.");
+  }
+  return getAddress(raw);
+}
+
+function normalizeTransferAmount(amountEth: string): bigint {
+  const raw = amountEth.trim();
+  if (!raw) {
+    throw new Error("Amount is required.");
+  }
+
+  let value: bigint;
+  try {
+    value = parseEther(raw);
+  } catch {
+    throw new Error("Invalid amount format.");
+  }
+
+  if (value <= 0n) {
+    throw new Error("Amount must be greater than zero.");
+  }
+
+  return value;
 }
 
 function toSnapshot(wallet: WalletLike): WalletSnapshot {
@@ -142,6 +203,43 @@ export async function fetchNativeBalance(
     formatted,
     symbol: target.symbol,
     updatedAt: new Date().toISOString()
+  };
+}
+
+export async function sendNativeTransaction(
+  request: NativeTransferRequest,
+  onProgress?: (progress: TransferProgress) => void
+): Promise<NativeTransferResult> {
+  const to = normalizeRecipientAddress(request.to);
+  const value = normalizeTransferAmount(request.amountEth);
+  const networkInfo = getNetwork(request.network);
+  const provider = getProvider(request.network);
+  const signer = new Wallet(normalizePrivateKey(request.privateKey), provider);
+
+  onProgress?.({ stage: "signing" });
+  const response = await signer.sendTransaction({ to, value });
+  onProgress?.({ stage: "broadcasted", hash: response.hash });
+  onProgress?.({ stage: "confirming", hash: response.hash });
+
+  const receipt = await response.wait();
+  if (!receipt || receipt.status !== 1) {
+    throw new Error("Transaction failed on-chain.");
+  }
+
+  const normalizedFrom = getAddress(response.from);
+  const chainId = Number(response.chainId);
+
+  return {
+    network: request.network,
+    chainId,
+    hash: response.hash,
+    from: normalizedFrom,
+    to,
+    amountEth: formatEther(value),
+    valueWei: value.toString(),
+    blockNumber: receipt.blockNumber,
+    explorerUrl: networkInfo.explorerTxBaseUrl ? `${networkInfo.explorerTxBaseUrl}/${response.hash}` : null,
+    confirmedAt: new Date().toISOString()
   };
 }
 

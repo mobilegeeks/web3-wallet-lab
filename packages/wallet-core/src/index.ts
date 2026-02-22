@@ -1,4 +1,13 @@
-export type { BalanceSnapshot, NetworkInfo, SupportedNetwork, WalletSnapshot } from "./wallet";
+export type {
+  BalanceSnapshot,
+  NativeTransferRequest,
+  NativeTransferResult,
+  NetworkInfo,
+  SupportedNetwork,
+  TransferProgress,
+  TransferProgressStage,
+  WalletSnapshot
+} from "./wallet";
 export {
   createWallet,
   fetchNativeBalance,
@@ -6,6 +15,7 @@ export {
   isValidMnemonic,
   isValidPrivateKey,
   maskAddress,
+  sendNativeTransaction,
   recoverWalletFromMnemonic,
   recoverWalletFromPrivateKey
 } from "./wallet";

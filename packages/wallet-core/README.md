@@ -11,3 +11,4 @@ Core wallet module for creation, recovery, validation, and chain reads.
 - `maskAddress`
 - `getSupportedNetworks`
 - `fetchNativeBalance`
+- `sendNativeTransaction`
